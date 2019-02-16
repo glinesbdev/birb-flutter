@@ -10,6 +10,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 // import 'package:birb/main.dart';
 import 'package:birb/no_content.dart';
+import 'package:birb/posts_list.dart';
 
 void main() {
   // testWidgets('Counter increments smoke test', (WidgetTester tester) async {
@@ -29,9 +30,9 @@ void main() {
   //   expect(find.text('1'), findsOneWidget);
   // });
   Widget buildTestableWidget(Widget widget) {
-    return new MediaQuery(
-      data: new MediaQueryData(),
-      child: new MaterialApp(home: widget)
+    return MediaQuery(
+      data: const MediaQueryData(),
+      child: MaterialApp(home: widget)
     );
   }
   
@@ -39,11 +40,20 @@ void main() {
     await tester.pumpWidget(buildTestableWidget(const NoContent()));
     expect(find.text('No birbs a birbing.'), findsOneWidget);
 
-    await tester.pumpWidget(MaterialApp(
+    await tester.pumpWidget(const MaterialApp(
       home: Scaffold(
-        body: const NoContent()
+        body: NoContent()
       ),
     ));
     expect(find.text('No birbs a birbing.'), findsOneWidget);
+  });
+
+  testWidgets('Renders list of posts', (WidgetTester tester) async {
+    await tester.pumpWidget(const MaterialApp(
+      home: PostsList(),
+    ));
+
+    expect(find.byType(Card), findsNWidgets(2));
+    expect(find.text('Prim Birb'), findsNWidgets(2));
   });
 }
