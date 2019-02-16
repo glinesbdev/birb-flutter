@@ -5,11 +5,20 @@ addons:
     packages:
       - lib32stdc++6
 install:
-  - git clone https://github.com/flutter/flutter.git -b beta
+  - |
+    if [!-d flutter] ; then
+      git clone https://github.com/flutter/flutter.git -b beta
+    fi
   - ./flutter/bin/flutter doctor
 script:
-  - cd app
-  - ../flutter/bin/flutter test
+  - ./flutter/bin/flutter $COMMAND
 cache:
   directories:
+    - flutter
     - /Users/bradyn/.pub-cache
+ matrix:
+  include:
+  - name: Test
+    env: COMMAND=test
+  - name: Analyze
+    env: COMMAND=analyze
