@@ -18,7 +18,7 @@ cache:
     - /Users/bradyn/.pub-cache
  matrix:
   include:
-  - name: Test
-    env: COMMAND=test
-  - name: Analyze
-    env: COMMAND=analyze
+    - name: Test
+      env: COMMAND=test
+    - name: Analyze
+      env: COMMAND=analyze
