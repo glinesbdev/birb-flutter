@@ -14,5 +14,6 @@ script:
   - ../flutter/bin/flutter test
 cache:
   directories:
+    - flutter
     - /Users/bradyn/.pub-cache
  
